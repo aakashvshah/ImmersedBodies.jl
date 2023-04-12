@@ -1,6 +1,7 @@
 module Curves
 
 export Curve, Segments, arclength, partition
+export translate, scale, rotate
 
 using StaticArrays
 
@@ -13,6 +14,27 @@ along the curve.
 abstract type Curve end
 abstract type ClosedCurve <: Curve end
 abstract type OpenCurve <: Curve end
+
+"""
+    translate(curve::Curve, v) :: Curve
+
+Translate `curve` by the vector `v`.
+"""
+translate(curve::Curve, v) = translate(curve, SVector{2,Float64}(v))
+
+"""
+    scale(curve::Curve, k) :: Curve
+
+Scale `curve` by the the factor `k`.
+"""
+function scale end
+
+"""
+    rotate(curve::Curve, θ) :: Curve
+
+Rotate `curve` counterclockwise by angle `θ`.
+"""
+function rotate end
 
 """
     isclosed(curve::Curve)
@@ -85,6 +107,21 @@ function partition(line::LineSegment, n::Integer)
     return Segments(points, lengths)
 end
 
+function translate(line::LineSegment, v::SVector{2})
+    error("implement")
+    # return LineSegment(...)
+end
+
+function scale(line::LineSegment, k::Number)
+    error("implement")
+    # return LineSegment(...)
+end
+
+function rotate(line::LineSegment, θ::Number)
+    error("implement")
+    # return LineSegment(...)
+end
+
 """
     Circle(r=1, center=(0, 0)) :: Curve
 
@@ -122,6 +159,21 @@ function partition(circle::Circle, n::Integer)
     lengths = fill(ds, n)
 
     return Segments(points, lengths)
+end
+
+function translate(circle::Circle, v::SVector{2})
+    error("implement")
+    # return Circle(...)
+end
+
+function scale(circle::Circle, k::Number)
+    error("implement")
+    # return Circle(...)
+end
+
+function rotate(circle::Circle, θ::Number)
+    error("implement")
+    # return Circle(...)
 end
 
 end # module Curves
